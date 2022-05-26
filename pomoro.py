@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import time as Time, datetime
 import platform
+import math
 
 class counter():
     
@@ -10,7 +11,8 @@ class counter():
         self.root = Tk()
         self.ttl_seconds = 0
         self.frm = Tk.grid(self.root)
-        self.label = ttk.Label(self.root, text= self.ttl_seconds,font = 'Arial 40 bold', foreground= 'cyan').grid(column=0 , row=0)
+        self.label = ttk.Label(self.root, text= self.ttl_seconds,font = 'Arial 40 bold', foreground= 'cyan')
+        self.label.grid(column=0 , row=0)
         self.startbutton = ttk.Button(self.frm, text="Start", command=self.startPomo).grid(column=1, row=0)
         self.quitbutton = ttk.Button(self.frm, text='Quit', command=self.quit).grid(column=2, row = 0)
     
@@ -22,13 +24,15 @@ class counter():
     def startPomo(self):
         self.ttl_seconds = 1500
         while self.ttl_seconds > 0:
-            timer = datetime.timedelta(seconds = self.ttl_seconds)
+            timer = "{minutes}:{seconds}".format(minutes = math.trunc(self.ttl_seconds / 60), seconds = self.ttl_seconds % 60)
+            self.label.configure(text=timer)
             self.root.update()
             self.root.after(1000)
             print('something')
             self.ttl_seconds -= 1
             (self.ttl_seconds)
     
+
     def quit(self):
         self.root.destroy()
 
