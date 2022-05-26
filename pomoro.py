@@ -3,10 +3,13 @@ from tkinter import *
 from tkinter import ttk
 import time as Time, datetime
 import math
+import platform
+import os
 
 class counter():
     
     def __init__(self):
+        self.plt = platform.system()
         self.root = Tk()
         self.ttl_seconds = 0
         self.running = True
@@ -32,6 +35,14 @@ class counter():
             self.root.update()
             self.root.after(1000)
             self.ttl_seconds -= 1
+            if self.ttl_seconds == 0:
+                if self.plt == "Darwin":
+                    os.system(f'''osascript -e 'display notification "Times Up!" with title "Pomodor"''')
+                if self.plt == 'Linux':
+                    os.system(f'''notify-send "Pomodor" "Times Up!"''')
+            
+
+
     
 
     def quit(self):
