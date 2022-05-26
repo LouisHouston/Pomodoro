@@ -42,12 +42,8 @@ class counter():
                     os.system(f'''notify-send "Pomodor" "Times Up!"''')
             
 
-
-    
-
     def quit(self):
         self.root.destroy()
-
 
 
     def stopPomo(self):
@@ -55,8 +51,6 @@ class counter():
         self.ttl_seconds = 0
         self.startbutton.configure(text="Start", command=self.startPomo)
         
-
-
 
 app = counter()
 
